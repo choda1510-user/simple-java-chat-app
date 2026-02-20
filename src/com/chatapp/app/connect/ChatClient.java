@@ -55,7 +55,7 @@ public class ChatClient implements Client, Sendable {
     }
 
     @Override
-    public boolean isReady() {
+    public boolean isRunning() {
         synchronized (this) {
             return clientSocket == null || clientSocket.isClosed();
         }

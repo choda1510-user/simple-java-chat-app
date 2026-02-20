@@ -9,13 +9,13 @@ public class ChatTestMain {
             System.out.println("chat: " + msg);
         });
         while (true) {
-            if (client.isReady()) {
+            if (client.isRunning()) {
                 String ip, port;
                 System.out.print("server ip: ");
                 ip = scanner.nextLine();
                 if (!ip.isBlank()) {
                     if (ip.contentEquals(":exit")) {
-                        if (!client.isReady()) {
+                        if (!client.isRunning()) {
                             client.disconnect();
                         }
                         break;
@@ -23,7 +23,7 @@ public class ChatTestMain {
                     System.out.print("server port: ");
                     port = scanner.nextLine();
                     if (port.contentEquals(":exit")) {
-                        if (!client.isReady()) {
+                        if (!client.isRunning()) {
                             client.disconnect();
                         }
                         break;
@@ -35,7 +35,7 @@ public class ChatTestMain {
                 input = scanner.nextLine();
                 if (!input.isBlank()) {
                     if (input.contentEquals(":exit")) {
-                        if (!client.isReady()) {
+                        if (!client.isRunning()) {
                             client.disconnect();
                         }
                         break;
@@ -56,12 +56,12 @@ public class ChatTestMain {
             System.out.println("chat: " + msg);
         });
         while (true) {
-            if (chatServer.isReady()) {
+            if (chatServer.isRunning()) {
                 System.out.print("port: ");
                 input = scanner.nextLine();
                 if (!input.isBlank()) {
                     if (input.contentEquals(":exit")) {
-                        if (!chatServer.isReady()) {
+                        if (!chatServer.isRunning()) {
                             chatServer.shutdown();
                         }
                         break;
@@ -73,7 +73,7 @@ public class ChatTestMain {
                 input = scanner.nextLine();
                 if (!input.isBlank()) {
                     if (input.contentEquals(":exit")) {
-                        if (!chatServer.isReady()) {
+                        if (!chatServer.isRunning()) {
                             chatServer.shutdown();
                         }
                         break;
