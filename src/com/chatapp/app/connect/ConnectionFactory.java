@@ -1,10 +1,10 @@
 package com.chatapp.app.connect;
 
 public class ConnectionFactory {
-    public Client getClient() {
-        return new SimpleClient();
+    public Client getClient(ReceivedListener receivedListener) {
+        return new ChatClient(receivedListener);
     }
-    public Server getServer() {
-        return new SimpleServer();
+    public Server getServer(ReceivedListener receivedListener) {
+        return new ChatServer(receivedListener);
     }
 }
