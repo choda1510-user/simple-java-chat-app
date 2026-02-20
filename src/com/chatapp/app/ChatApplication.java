@@ -1,6 +1,5 @@
 package com.chatapp.app;
 
-import com.chatapp.app.config.DefaultConfig;
 import com.chatapp.app.config.GuiConfig;
 import com.chatapp.app.config.SwingConfig;
 
@@ -12,7 +11,6 @@ import com.chatapp.app.config.SwingConfig;
 public class ChatApplication {
     private final GuiConfig guiConfig;
     public ChatApplication(String[] args) {
-        //this.guiConfig = new DefaultConfig();
         this.guiConfig = new SwingConfig();
         this.guiConfig.show();
     }
