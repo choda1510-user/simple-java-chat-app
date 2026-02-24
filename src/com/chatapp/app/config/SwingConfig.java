@@ -1,10 +1,9 @@
 package com.chatapp.app.config;
 
-import com.chatapp.app.callback.ReceivedServerController;
-import com.chatapp.app.callback.ClientSendController;
-import com.chatapp.app.callback.ServerController;
-import com.chatapp.app.callback.ServerSendController;
+import com.chatapp.app.callback.*;
+import com.chatapp.app.connect.ChatClient;
 import com.chatapp.app.connect.ChatServer;
+import com.chatapp.app.connect.Client;
 import com.chatapp.app.connect.Server;
 import com.chatapp.app.gui.*;
 
@@ -31,6 +30,13 @@ public class SwingConfig implements GuiConfig {
         frame.getServerPanel().getHeaderPanel().addButtonActionListener(serverController);
         ServerSendController serverClientSendController = new ServerSendController(server, server, frame.getServerPanel().getTextAreaPanel(), frame.getServerPanel().getSubmitPanel());
         frame.getServerPanel().getSubmitPanel().addButtonActionListener(serverClientSendController);
+
+        ReceivedClientController receivedClientController = new ReceivedClientController(frame.getClientPanel().getTextAreaPanel());
+        Client client = new ChatClient(receivedClientController);
+        ClientController clientController = new ClientController(client, frame.getClientPanel().getHeaderPanel());
+        frame.getClientPanel().getHeaderPanel().addAddButtonActionListener(clientController);
+        ClientSendController clientSendController = new ClientSendController(client, client, frame.getClientPanel().getSubmitPanel());
+        frame.getClientPanel().getSubmitPanel().addButtonActionListener(clientSendController);
     }
     public SwingFrame frame(SwingServerPanel serverPanel, SwingClientPanel clientPanel) {
         return SwingFrame.builder()

@@ -88,10 +88,17 @@ public class SwingClientHeaderPanel {
         return ipLabel.getText();
     }
 
+    public String getIpTextFieldText() {
+        return ipTextField.getText();
+    }
+
     public String getPortLabelText() {
         return portLabel.getText();
     }
 
+    public String getPortTextFieldText() {
+        return portTextField.getText();
+    }
     public int getIpTextFieldColumns() {
         return ipTextField.getColumns();
     }

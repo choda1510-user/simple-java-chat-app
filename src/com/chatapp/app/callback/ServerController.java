@@ -25,8 +25,10 @@ public class ServerController implements ActionListener {
         }
         if (server.canRunning()) {
             server.bind(port);
+            serverHeaderPanel.setButtonText("shutdown");
         } else {
             server.shutdown();
+            serverHeaderPanel.setButtonText("bind");
         }
     }
 }
