@@ -47,6 +47,7 @@ public class SwingTextAreaPanel {
     }
     public void appendText(String text) {
         textArea.append(text);
+        textArea.append("\n");
     }
 
 }

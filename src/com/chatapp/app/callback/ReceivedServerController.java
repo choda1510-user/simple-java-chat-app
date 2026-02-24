@@ -8,7 +8,12 @@ import javax.swing.*;
 
 public class ReceivedServerController implements ReceivedListener {
     private final SwingTextAreaPanel textAreaPanel;
-    private final Sendable sender;
+
+    public void setSender(Sendable sender) {
+        this.sender = sender;
+    }
+
+    private Sendable sender;
 
     public ReceivedServerController(SwingTextAreaPanel textAreaPanel, Sendable sender) {
         this.textAreaPanel = textAreaPanel;

@@ -63,7 +63,7 @@ public class ChatServer implements Server, Sendable {
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean canRunning() {
         synchronized (this) {
             return serverSocket == null || serverSocket.isClosed();
         }
