@@ -21,6 +21,7 @@ public class ChatServerEventQueue {
                 }
             }
         });
+        eventThread.setName("ChatEventQueueThread");
         eventThread.setDaemon(true);
         eventThread.start();
     }

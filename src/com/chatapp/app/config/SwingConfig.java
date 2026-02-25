@@ -26,14 +26,14 @@ public class SwingConfig implements GuiConfig {
         ReceivedServerController receivedServerController = new ReceivedServerController(frame.getServerPanel().getTextAreaPanel(), null);
         Server server = new ChatServer(receivedServerController);
         receivedServerController.setSender(server);
-        ServerController serverController = new ServerController(server, frame.getServerPanel().getHeaderPanel());
+        ServerController serverController = new ServerController(server, frame.getServerPanel().getHeaderPanel(), frame.getServerPanel().getTextAreaPanel());
         frame.getServerPanel().getHeaderPanel().addButtonActionListener(serverController);
         ServerSendController serverClientSendController = new ServerSendController(server, server, frame.getServerPanel().getTextAreaPanel(), frame.getServerPanel().getSubmitPanel());
         frame.getServerPanel().getSubmitPanel().addButtonActionListener(serverClientSendController);
 
         ReceivedClientController receivedClientController = new ReceivedClientController(frame.getClientPanel().getTextAreaPanel());
         Client client = new ChatClient(receivedClientController);
-        ClientController clientController = new ClientController(client, frame.getClientPanel().getHeaderPanel());
+        ClientController clientController = new ClientController(client, frame.getClientPanel().getHeaderPanel(), frame.getClientPanel().getTextAreaPanel());
         frame.getClientPanel().getHeaderPanel().addButtonActionListener(clientController);
         ClientSendController clientSendController = new ClientSendController(client, client, frame.getClientPanel().getSubmitPanel());
         frame.getClientPanel().getSubmitPanel().addButtonActionListener(clientSendController);

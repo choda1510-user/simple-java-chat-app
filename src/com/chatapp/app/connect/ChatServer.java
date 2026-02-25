@@ -1,6 +1,7 @@
 package com.chatapp.app.connect;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collections;
@@ -12,6 +13,7 @@ public class ChatServer implements Server, Sendable {
     private List<Socket> clientSockets;
     private List<Sendable> senders;
     private ReceivedListener listener;
+    private BindExceptionHandler bindExceptionHandler;
     public ChatServer(ReceivedListener listener) {
         this.clientSockets = Collections.synchronizedList(new LinkedList<>());
         this.senders = Collections.synchronizedList(new LinkedList<>());
@@ -33,6 +35,11 @@ public class ChatServer implements Server, Sendable {
                 synchronized (this) {
                     serverSocket = new ServerSocket(port);
                 }
+            } catch (BindException e) {
+                if (bindExceptionHandler != null) {
+                    bindExceptionHandler.handle(e);
+                }
+                return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -72,5 +79,9 @@ public class ChatServer implements Server, Sendable {
     @Override
     public void send(String message) {
         senders.forEach((sender) -> sender.send(message));
+    }
+
+    public void setBindExceptionHandler(BindExceptionHandler bindExceptionHandler) {
+        this.bindExceptionHandler = bindExceptionHandler;
     }
 }

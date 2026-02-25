@@ -2,6 +2,7 @@ package com.chatapp.app.callback;
 
 import com.chatapp.app.connect.Server;
 import com.chatapp.app.gui.SwingServerHeaderPanel;
+import com.chatapp.app.gui.SwingTextAreaPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +10,17 @@ import java.awt.event.ActionListener;
 public class ServerController implements ActionListener {
     private Server server;
     private SwingServerHeaderPanel serverHeaderPanel;
+    private SwingTextAreaPanel textAreaPanel;
 
-    public ServerController(Server server, SwingServerHeaderPanel serverHeaderPanel) {
+    public ServerController(Server server, SwingServerHeaderPanel serverHeaderPanel, SwingTextAreaPanel textAreaPanel) {
         this.server = server;
         this.serverHeaderPanel = serverHeaderPanel;
+        this.textAreaPanel = textAreaPanel;
+        server.setBindExceptionHandler((e) -> {
+            textAreaPanel.appendText(e.getMessage());
+            serverHeaderPanel.setTextFieldText("");
+            serverHeaderPanel.setButtonText("bind");
+        });
     }
 
     @Override
@@ -21,6 +29,7 @@ public class ServerController implements ActionListener {
         try {
             port = Integer.parseInt(serverHeaderPanel.getTextFieldText().trim());
         } catch (NumberFormatException ex) {
+            textAreaPanel.appendText(ex.getMessage());
             return;
         }
         if (server.canRunning()) {
