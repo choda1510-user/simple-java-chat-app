@@ -131,7 +131,7 @@ public class SwingClientHeaderPanel {
         button.setText(text);
     }
 
-    public void addAddButtonActionListener(ActionListener actionListener) {
+    public void addButtonActionListener(ActionListener actionListener) {
         button.addActionListener(actionListener);
     }
 

@@ -34,7 +34,7 @@ public class SwingConfig implements GuiConfig {
         ReceivedClientController receivedClientController = new ReceivedClientController(frame.getClientPanel().getTextAreaPanel());
         Client client = new ChatClient(receivedClientController);
         ClientController clientController = new ClientController(client, frame.getClientPanel().getHeaderPanel());
-        frame.getClientPanel().getHeaderPanel().addAddButtonActionListener(clientController);
+        frame.getClientPanel().getHeaderPanel().addButtonActionListener(clientController);
         ClientSendController clientSendController = new ClientSendController(client, client, frame.getClientPanel().getSubmitPanel());
         frame.getClientPanel().getSubmitPanel().addButtonActionListener(clientSendController);
     }
