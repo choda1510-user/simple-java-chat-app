@@ -4,6 +4,7 @@ import com.chatapp.app.connect.Client;
 import com.chatapp.app.gui.SwingClientHeaderPanel;
 import com.chatapp.app.gui.SwingTextAreaPanel;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,6 +26,13 @@ public class ClientController implements ActionListener {
         this.client.setConnectSuccessHandler(() -> {
             clientHeaderPanel.setButtonText("disconnect");
             state = 2;
+        });
+        this.client.setCloseListener((sender) -> {
+            SwingUtilities.invokeLater(() -> {
+                textAreaPanel.appendText("disconnected from the server");
+                clientHeaderPanel.setButtonText("connect");
+            });
+            state = 0;
         });
     }
     @Override

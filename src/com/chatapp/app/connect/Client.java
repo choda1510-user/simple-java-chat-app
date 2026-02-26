@@ -5,4 +5,5 @@ public interface Client extends Sendable, StatusCheckable, Disconnectable {
     void setReceivedListener(ReceivedListener listener); // 블록
     void setConnectExceptionHandler(ConnectExceptionHandler connectExceptionHandler); // 블록
     void setConnectSuccessHandler(ConnectSuccessHandler connectSuccessHandler); // 블록
+    void setCloseListener(CloseListener closeListener); // 블록
 }

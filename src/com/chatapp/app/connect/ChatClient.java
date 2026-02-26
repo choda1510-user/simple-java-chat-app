@@ -10,6 +10,7 @@ public class ChatClient implements Client, Sendable {
     private Sendable sender;
     private ConnectExceptionHandler connectExceptionHandler;
     private ConnectSuccessHandler connectSuccessHandler;
+    private CloseListener closeListener;
     public ChatClient(ReceivedListener listener) {
         this.listener = listener;
         if (listener == null) throw new NullPointerException();
@@ -33,7 +34,7 @@ public class ChatClient implements Client, Sendable {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                ChatClientRutin rutin = new ChatClientRutin(this, clientSocket, listener);
+                ChatClientRutin rutin = new ChatClientRutin(this, clientSocket, listener, closeListener);
                 Thread clientThread = new Thread(rutin);
                 clientThread.start();
                 this.sender = rutin;
@@ -87,5 +88,9 @@ public class ChatClient implements Client, Sendable {
     @Override
     public void setConnectSuccessHandler(ConnectSuccessHandler connectSuccessHandler) {
         this.connectSuccessHandler = connectSuccessHandler;
+    }
+    @Override
+    public void setCloseListener(CloseListener closeListener) {
+        this.closeListener = closeListener;
     }
 }
