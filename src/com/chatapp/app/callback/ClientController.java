@@ -24,6 +24,7 @@ public class ClientController implements ActionListener {
             state = 0;
         });
         this.client.setConnectSuccessHandler(() -> {
+            textAreaPanel.setText("");
             clientHeaderPanel.setButtonText("disconnect");
             state = 2;
         });
@@ -39,7 +40,13 @@ public class ClientController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (state == 0 && client.canRunning()) {
             String ip = clientHeaderPanel.getIpTextFieldText();
-            int port = Integer.parseInt(clientHeaderPanel.getPortTextFieldText().trim());
+            int port;
+            try {
+                port = Integer.parseInt(clientHeaderPanel.getPortTextFieldText().trim());
+            } catch (NumberFormatException ex) {
+                textAreaPanel.appendText(ex.getMessage());
+                return;
+            }
             client.connect(ip, port);
             clientHeaderPanel.setButtonText("connecting");
             state = 1;

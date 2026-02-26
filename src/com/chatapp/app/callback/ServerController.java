@@ -18,7 +18,6 @@ public class ServerController implements ActionListener {
         this.textAreaPanel = textAreaPanel;
         server.setBindExceptionHandler((e) -> {
             textAreaPanel.appendText(e.getMessage());
-            serverHeaderPanel.setTextFieldText("");
             serverHeaderPanel.setButtonText("bind");
         });
     }
@@ -37,6 +36,7 @@ public class ServerController implements ActionListener {
             serverHeaderPanel.setButtonText("shutdown");
         } else {
             server.shutdown();
+            textAreaPanel.setText("");
             serverHeaderPanel.setButtonText("bind");
         }
     }
