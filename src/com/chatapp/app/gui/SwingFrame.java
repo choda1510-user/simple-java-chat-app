@@ -106,6 +106,7 @@ public class SwingFrame {
                                 .build())
                         .textAreaPanel(SwingTextAreaPanel.builder()
                                 .size(6, 30)
+                                .setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER)
                                 .build())
                         .submitPanel(SwingSubmitPanel.builder()
                                 .buttonText("send")

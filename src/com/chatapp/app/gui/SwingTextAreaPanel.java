@@ -7,16 +7,20 @@ import static com.chatapp.app.util.NullChecker.nullCheck;
 public class SwingTextAreaPanel {
     private final JPanel panel;
     private final JTextArea textArea;
-    private SwingTextAreaPanel(JPanel panel, JTextArea textArea) {
+    private final JScrollPane scrollPane;
+    private SwingTextAreaPanel(JPanel panel, JTextArea textArea, JScrollPane scrollPane) {
         this.panel = panel;
         this.textArea = textArea;
+        this.scrollPane = scrollPane;
     }
     public static class Builder {
         private final JPanel panel;
         private final JTextArea textArea;
+        private final JScrollPane scrollPane;
         private Builder() {
             panel = new JPanel();
             textArea = new JTextArea();
+            scrollPane = new JScrollPane(textArea);
         }
         public Builder enabled(boolean b) {
             textArea.setEnabled(b);
@@ -27,10 +31,14 @@ public class SwingTextAreaPanel {
             textArea.setColumns(columns);
             return this;
         }
+        public Builder setHorizontalScrollBarPolicy(int policy) {
+            scrollPane.setHorizontalScrollBarPolicy(policy);
+            return this;
+        }
         public SwingTextAreaPanel build() {
-            nullCheck(panel, textArea);
-            panel.add(textArea);
-            return new SwingTextAreaPanel(panel, textArea);
+            nullCheck(panel, textArea, scrollPane);
+            panel.add(scrollPane);
+            return new SwingTextAreaPanel(panel, textArea, scrollPane);
         }
     }
     public static Builder builder() {
