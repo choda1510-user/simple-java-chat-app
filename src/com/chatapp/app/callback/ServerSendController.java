@@ -25,7 +25,7 @@ public class ServerSendController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!status.canRunning()) {
-            String message = submitPanel.getTextFieldText();
+            String message = "[server]: " + submitPanel.getTextFieldText();
             submitPanel.setTextFieldText("");
             textAreaPanel.appendText(message);
             ChatServerEventQueue.invoke(() -> {

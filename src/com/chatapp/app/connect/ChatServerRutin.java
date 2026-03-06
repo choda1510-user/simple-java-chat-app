@@ -71,7 +71,11 @@ public class ChatServerRutin implements Runnable {
         while (true) {
             try {
                 Socket clientSocket = serverSocket.accept();
-                ChatClientRutin clientRutin = new ChatClientRutin(lock, clientSocket, listener, new DefaultCloseListener(clientSockets, senders, clientSocket));
+                ChatClientRutin clientRutin = new ChatClientRutin(lock, clientSocket,message -> {
+                    String ip = clientSocket.getInetAddress().getHostAddress();
+                    String port = String.valueOf(clientSocket.getPort());
+                    listener.received("[" + ip + ":" + port + "]: " + message);
+                }, new DefaultCloseListener(clientSockets, senders, clientSocket));
                 Thread clientThread = new Thread(clientRutin);
                 clientSockets.add(clientSocket);
                 senders.add(clientRutin);
